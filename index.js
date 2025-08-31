@@ -22,15 +22,15 @@ var alunos = [
     }
 ];
 
-app.get('/', (req, res) => {
-    res.send(alunos)
-})
+// Usando o método Post para add um aluno via postman 
 
 app.post('/', (req, res) => {
     const {ra, nome, cursos} = req.body
-    alunos.push({ra:ra, nome:nome, cursos:cursos})
+    alunos.push({ra, nome, cursos})
     res.send(alunos)
 })
+
+
 
 
 app.listen(port, () => {
