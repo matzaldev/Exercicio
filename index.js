@@ -40,6 +40,15 @@ app.post('/add-curso', (req, res) => {
     res.send(aluno);
 });
 
+// usando metodo put para alterar os dados de um alunos atraves do ra via postman
+
+app.put('/edit', (req, res) => {
+    const { ra, nome } = req.body;
+    const index = alunos.findIndex(x => x.ra == ra);
+    alunos[index].nome = nome;
+    res.send(alunos[index]);
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
