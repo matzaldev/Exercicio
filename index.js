@@ -47,7 +47,45 @@ app.put('/edit', (req, res) => {
     const index = alunos.findIndex(x => x.ra == ra);
     alunos[index].nome = nome;
     res.send(alunos[index]);
-})
+});
+
+// usando o metodo put para alterar o curso de um aluno atraves do ra via postman
+
+app.put('/edit-curso', (req, res) => {
+    const { ra, cursos } = req.body;
+    const index = alunos.findIndex(x => x.ra == ra);
+    alunos[index].cursos = cursos;
+    res.send(alunos[index]);
+});
+
+// usando o metodo delete para remover um aluno da lista atraves do ra no postman
+app.delete('/delete', (req, res) => {
+    const {ra} = req.body.ra;
+    const index = alunos.findIndex(x => x.ra == ra);
+    alunos.splice(index, 1);
+    res.send(alunos);
+});
+
+// usando o metodo delete para remover um curso de um aluno atraves do ra via postman
+app.delete('/delete-curso', (req, res) => {
+    const { ra, curso } = req.body;
+    const aluno = alunos.find(x => x.ra == ra);
+    const index = aluno.cursos.findIndex(x => x == curso);
+    aluno.cursos.splice(index, 1);
+    res.send(aluno);
+});
+
+// usando o metodo get para listar todos os alunos
+app.get('/get', (req, res) => {
+    res.send(alunos);
+});
+
+// usando o metodo get para listar um aluno atraves do ra via postman
+app.get('/get-ra', (req, res) => {
+    const ra = req.body.ra;
+    const aluno = alunos.find(x => x.ra == ra);
+    res.send(aluno);
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
